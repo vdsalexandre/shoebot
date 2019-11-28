@@ -6,8 +6,7 @@ import utils.Utils;
 
 public class MainBot {
     public static void main(String args[]) throws Exception {
-        Utils u = new Utils();
-        String discordToken = u.getApplicationPropertyValue("app.discord.token");
+        String discordToken = Utils.getProperty("app.discord.bot.token");
         JDA jda = new JDABuilder(discordToken).build();
         jda.addEventListener(new HelloEvent());
         jda.addEventListener(new RythmEvent());

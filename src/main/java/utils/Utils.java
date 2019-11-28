@@ -5,12 +5,36 @@ import java.io.InputStream;
 import java.util.Properties;
 
 public class Utils {
-    public String getApplicationPropertyValue(String propertyKey) throws IOException {
-        Properties p = new Properties();
-        InputStream is = getClass().getClassLoader().getResourceAsStream("config/application.properties");
-        p.load(is);
-        String propertyValue = p.getProperty(propertyKey);
-        is.close();
-        return propertyValue;
+    private static final String PROPERTIES_PATH = "config/application.properties";
+    private static Properties p = null;
+
+    public static String getProperty(String propertyKey) {
+        try {
+            Properties properties = getPropertiesFile();
+            return properties.getProperty(propertyKey);
+        } catch (IOException e) {
+            System.err.println("Properties file not found ...");
+            return "";
+        }
+    }
+
+    public static String[] getProperties(String propertyKey) {
+        try {
+            Properties properties = getPropertiesFile();
+            return properties.getProperty(propertyKey).split(",");
+        } catch (IOException e) {
+            System.err.println("Properties file not found ...");
+            return null;
+        }
+    }
+
+    private static Properties getPropertiesFile() throws IOException {
+        if (p == null) {
+            p = new Properties();
+            InputStream is = Utils.class.getClassLoader().getResourceAsStream(PROPERTIES_PATH);
+            p.load(is);
+            is.close();
+        }
+        return p;
     }
 }
