@@ -18,12 +18,12 @@ public class RythmEvent extends ListenerAdapter {
         User author = event.getAuthor();
         String currentChannel = event.getChannel().getName();
 
-        if (author.isBot() && !MUSIC_CHANNEL_NAME.equals(currentChannel)) {
+        if (author.isBot() && !MUSIC_CHANNEL_NAME.equals(currentChannel) && isMusicalCommand(firstWord)) {
             System.out.println("Nouveau message de " + author.getName() + " envoyé vers #" + MUSIC_CHANNEL_NAME + " depuis #" + event.getChannel().getName() + " --> " + messageReceived);
             sendMusicMessageToMusicChannel(event, messageReceived);
         }
 
-        if (Arrays.asList(rythmKeyWords).contains(firstWord) && !author.isBot() && MUSIC_CHANNEL_NAME != currentChannel) {
+        if (isMusicalCommand(firstWord) && !author.isBot() && MUSIC_CHANNEL_NAME != currentChannel) {
             System.out.println("Nouvelle commande lancée par [ " + author.getName() + " ] --> " + messageReceived);
             sendMusicMessageToMusicChannel(event, messageReceived);
         }
@@ -33,5 +33,9 @@ public class RythmEvent extends ListenerAdapter {
         TextChannel musicChannel = event.getGuild().getTextChannelsByName(MUSIC_CHANNEL_NAME, true).get(0);
         musicChannel.sendMessage(messageReceived).queue();
         event.getMessage().delete().complete();
+    }
+
+    private Boolean isMusicalCommand(String firstWord) {
+        return Arrays.asList(rythmKeyWords).contains(firstWord);
     }
 }
