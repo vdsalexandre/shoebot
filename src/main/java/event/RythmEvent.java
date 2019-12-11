@@ -4,10 +4,13 @@ import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.User;
 import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import utils.Utils;
 import java.util.Arrays;
 
 public class RythmEvent extends ListenerAdapter {
+    private static final Logger LOG = LogManager.getLogger(RythmEvent.class);
     public static final String MUSIC_CHANNEL_NAME = Utils.getProperty("app.discord.channel.music");
     public static final String[] rythmKeyWords = Utils.getProperties("app.discord.music.keywords");
     public static final String MUSIC_BOT_NAME = Utils.getProperty("app.discord.musicbot.name");
@@ -19,6 +22,7 @@ public class RythmEvent extends ListenerAdapter {
         String currentChannel = event.getChannel().getName();
 
         if (isMusicalBot(author.getName()) && !isMusicalChannel(currentChannel)) {
+            LOG.info("Message de " + author.getName() + " envoyé vers #" + MUSIC_CHANNEL_NAME + " depuis #" + currentChannel + " --> " + messageReceived);
             System.out.println("Message de " + author.getName() + " envoyé vers #" + MUSIC_CHANNEL_NAME + " depuis #" + currentChannel + " --> " + messageReceived);
             sendMusicMessageToMusicChannel(event, messageReceived);
         }

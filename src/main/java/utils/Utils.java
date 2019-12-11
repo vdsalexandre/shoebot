@@ -1,5 +1,9 @@
 package utils;
 
+import net.dv8tion.jda.api.entities.MessageEmbed;
+import net.dv8tion.jda.api.entities.TextChannel;
+import net.dv8tion.jda.api.events.message.guild.GuildMessageReceivedEvent;
+import net.dv8tion.jda.internal.entities.TextChannelImpl;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -38,5 +42,17 @@ public class Utils {
             is.close();
         }
         return p;
+    }
+
+    public static void sendMessageToAnotherChannel(TextChannel textChannel, String message) {
+        textChannel.sendMessage(message).queue();
+    }
+
+    public static void sendMessageToAnotherChannel(TextChannel textChannel, MessageEmbed message) {
+        textChannel.sendMessage(message).queue();
+    }
+
+    public static void deleteMessageFromChannel(GuildMessageReceivedEvent event) {
+        event.getMessage().delete().complete();
     }
 }
