@@ -5,3 +5,7 @@ target/
 *.iws
 *.iml
 *.ipr
+
+### Config files ###
+src/main/resources/config/
+src/test/
