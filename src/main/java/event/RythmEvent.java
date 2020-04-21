@@ -7,6 +7,7 @@ import net.dv8tion.jda.api.hooks.ListenerAdapter;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import utils.Utils;
+
 import java.util.Arrays;
 
 public class RythmEvent extends ListenerAdapter {
@@ -48,6 +49,6 @@ public class RythmEvent extends ListenerAdapter {
     }
 
     private Boolean isMusicalChannel(String currentChannel) {
-        return  MUSIC_CHANNEL_NAME.equals(currentChannel);
+        return MUSIC_CHANNEL_NAME.equals(currentChannel);
     }
 }
