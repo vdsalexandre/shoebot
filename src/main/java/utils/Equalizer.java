@@ -12,4 +12,15 @@ public class Equalizer {
         }
         return score;
     }
+
+    public int calculateEquals(String input, String expected) {
+        int score = 0;
+
+        for (int i = 0; i < expected.length(); i++) {
+            if (expected.charAt(i) == input.charAt(i))
+                score += expected.charAt(i);
+        }
+
+        return score;
+    }
 }

@@ -51,4 +51,12 @@ class BlindEventTest {
 
         assertThat(inputScore).isNotEqualTo(expectedScore);
     }
+
+    @Test
+    void name() {
+        Equalizer equalizer = new Equalizer();
+        String expected = "admin";
+        String input = "ADMIN";
+        int score = equalizer.calculateEquals(input, expected);
+    }
 }
