@@ -53,10 +53,37 @@ class BlindEventTest {
     }
 
     @Test
-    void name() {
-        Equalizer equalizer = new Equalizer();
+    void returns_true_when_two_words_have_the_same_letters() {
         String expected = "admin";
         String input = "ADMIN";
+        int expectedScore = expected.length(); // each letter in commun equals 1
+
+        Equalizer equalizer = new Equalizer();
         int score = equalizer.calculateEquals(input, expected);
+
+        assertThat(score).isEqualTo(expectedScore);
+    }
+
+    @Test
+    void returns_true_when_count_words_is_right() {
+        String input = "Welcome to the jungle";
+        int expectedCountWords = 4;
+
+        Equalizer equalizer = new Equalizer();
+        int countWords = equalizer.countWords(input);
+
+        assertThat(countWords).isEqualTo(expectedCountWords);
+    }
+
+    @Test
+    void returns_true_when_two_words_have_the_same_count_of_words() {
+        String input = "Welcome to the jungle";
+        String expected = "Welcom to th jungle";
+
+        Equalizer equalizer = new Equalizer();
+        int expectedCountWords = equalizer.countWords(expected);
+        int countWords = equalizer.countWords(input);
+
+        assertThat(countWords).isEqualTo(expectedCountWords);
     }
 }

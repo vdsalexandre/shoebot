@@ -17,10 +17,18 @@ public class Equalizer {
         int score = 0;
 
         for (int i = 0; i < expected.length(); i++) {
-            if (expected.charAt(i) == input.charAt(i))
-                score += expected.charAt(i);
+            try {
+                if (expected.toLowerCase().charAt(i) == input.toLowerCase().charAt(i))
+                    score++;
+            } catch (StringIndexOutOfBoundsException ex) {
+                return score;
+            }
         }
 
         return score;
+    }
+
+    public int countWords(String input) {
+        return input.split(" ").length;
     }
 }
