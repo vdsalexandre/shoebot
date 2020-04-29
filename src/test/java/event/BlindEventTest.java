@@ -8,11 +8,6 @@ import static org.assertj.core.api.Assertions.assertThat;
 class BlindEventTest {
 
     @Test
-    void testSettings() {
-        assertThat(true).isTrue();
-    }
-
-    @Test
     void returns_true_when_one_word_equals_another_word() {
         String expectedWord = "Guns N' Roses - Welcome To The Jungle";
         String inputWord = "Guns N' Roses - Welcome To The Jungle";
@@ -88,7 +83,7 @@ class BlindEventTest {
     }
 
     @Test
-    void returns_true_when_two_sentences_have_the_same_words() {
+    void returns_true_when_two_sentences_have_the_same_score() {
         String input = "Welcome to the jungle";
         String expected = "welcome to the JUNGLE";
 
@@ -96,5 +91,16 @@ class BlindEventTest {
         boolean sameWords = equalizer.compare(input, expected);
 
         assertThat(sameWords).isTrue();
+    }
+
+    @Test
+    void returns_true_when_two_different_words_have_same_length_and_same_letters() {
+        String input = "jungel";
+        String expected = "Jungle";
+
+        Equalizer equalizer = new Equalizer();
+        boolean closeWords = equalizer.compareCloseWords(expected, input);
+
+        assertThat(closeWords).isTrue();
     }
 }

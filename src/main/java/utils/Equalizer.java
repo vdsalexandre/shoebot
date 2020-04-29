@@ -6,11 +6,7 @@ public class Equalizer {
     }
 
     public int getScore(String input) {
-        int score = 0;
-        for (char letter : input.toCharArray()) {
-            score += letter;
-        }
-        return score;
+        return input.chars().sum();
     }
 
     public int calculateEquals(String input, String expected) {
@@ -18,7 +14,7 @@ public class Equalizer {
 
         for (int i = 0; i < expected.length(); i++) {
             try {
-                if (expected.toLowerCase().charAt(i) == input.toLowerCase().charAt(i))
+                if (normalize(expected).charAt(i) == normalize(input).charAt(i))
                     score++;
             } catch (StringIndexOutOfBoundsException ex) {
                 return score;
@@ -46,5 +42,27 @@ public class Equalizer {
             return expectedScore == score;
         }
         return false;
+    }
+
+    private boolean hasSameLetters(String expectedWord, String inputWord) {
+        int count = 0;
+        for (char c : normalize(expectedWord).toCharArray()) {
+            if (normalize(inputWord).contains(String.valueOf(c)))
+                count++;
+        }
+
+        return count == expectedWord.length();
+    }
+
+    private String normalize(String inputValue) {
+        return inputValue.toLowerCase();
+    }
+
+    public boolean compareCloseWords(String expected, String input) {
+        return hasSameLetters(expected, input) && hasSameScore(expected, input);
+    }
+
+    private boolean hasSameScore(String expected, String input) {
+        return getScore(normalize(expected)) == getScore(normalize(input));
     }
 }
