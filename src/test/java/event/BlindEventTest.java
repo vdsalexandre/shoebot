@@ -86,4 +86,15 @@ class BlindEventTest {
 
         assertThat(countWords).isEqualTo(expectedCountWords);
     }
+
+    @Test
+    void returns_true_when_two_sentences_have_the_same_words() {
+        String input = "Welcome to the jungle";
+        String expected = "welcome to the JUNGLE";
+
+        Equalizer equalizer = new Equalizer();
+        boolean sameWords = equalizer.compare(input, expected);
+
+        assertThat(sameWords).isTrue();
+    }
 }

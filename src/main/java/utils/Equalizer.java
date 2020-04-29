@@ -31,4 +31,20 @@ public class Equalizer {
     public int countWords(String input) {
         return input.split(" ").length;
     }
+
+    public boolean compare(String input, String expected) {
+        String[] expectedWords = expected.split(" ");
+        String[] inputWords = input.split(" ");
+        int expectedScore = expected.replaceAll(" ", "").length();
+        int score = 0;
+
+        if (expectedWords.length == inputWords.length) {
+            for (int i = 0; i < expectedWords.length; i++) {
+                score += calculateEquals(inputWords[i], expectedWords[i]);
+            }
+
+            return expectedScore == score;
+        }
+        return false;
+    }
 }
