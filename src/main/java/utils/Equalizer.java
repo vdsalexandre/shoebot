@@ -58,11 +58,27 @@ public class Equalizer {
         return inputValue.toLowerCase();
     }
 
+    private String clean(String inputValue) {
+        return inputValue.replaceAll(" ", "");
+    }
+
     public boolean compareCloseWords(String expected, String input) {
         return hasSameLetters(expected, input) && hasSameScore(expected, input);
     }
 
     private boolean hasSameScore(String expected, String input) {
         return getScore(normalize(expected)) == getScore(normalize(input));
+    }
+
+    public int getPercentageOf(String expected, String input) {
+        double expectedScore = getScore(clean(normalize(expected)));
+        double inputScore = getScore(clean(normalize(input)));
+        double percentage = inputScore / expectedScore * 100;
+
+        return (int) Math.round(percentage);
+    }
+
+    public boolean isPercentageBiggerOrEqualTo90(int percentage) {
+        return percentage >= 90;
     }
 }

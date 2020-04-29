@@ -103,4 +103,16 @@ class BlindEventTest {
 
         assertThat(closeWords).isTrue();
     }
+
+    @Test
+    void returns_true_when_input_word_percentage_is_between_90_and_100_percent() {
+        String input = "welcomE to the jungl";
+        String expected = "Welcome To The Jungle";
+
+        Equalizer equalizer = new Equalizer();
+        int percentage = equalizer.getPercentageOf(expected, input);
+
+        boolean isCloseWord = equalizer.isPercentageBiggerOrEqualTo90(percentage);
+        assertThat(isCloseWord).isTrue();
+    }
 }
