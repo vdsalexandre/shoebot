@@ -1,6 +1,8 @@
 package event;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.CsvSource;
 import utils.Equalizer;
 
 import static org.assertj.core.api.Assertions.assertThat;
@@ -105,14 +107,23 @@ class BlindEventTest {
     }
 
     @Test
-    void returns_true_when_input_word_percentage_is_between_90_and_100_percent() {
+    void returns_true_when_word_percentage_is_between_90_and_100_percent() {
         String input = "welcomE to the jungl";
         String expected = "Welcome To The Jungle";
 
         Equalizer equalizer = new Equalizer();
-        int percentage = equalizer.getPercentageOf(expected, input);
+        boolean isCloseWord = equalizer.isPercentageBiggerOrEqualTo(expected, input, 90);
 
-        boolean isCloseWord = equalizer.isPercentageBiggerOrEqualTo90(percentage);
+        assertThat(isCloseWord).isTrue();
+    }
+
+    @ParameterizedTest
+    @CsvSource({"coco,CoC", "independence day,Independancday",
+            "la belle et la bete,la bell et la bet", "anastasia,anastasa"})
+    void returns_true_when_small_word_percentage_is_between_70_and_100_percent(String expected, String input) {
+        Equalizer equalizer = new Equalizer();
+
+        boolean isCloseWord = equalizer.isPercentageBiggerOrEqualTo(expected, input, 80);
         assertThat(isCloseWord).isTrue();
     }
 }

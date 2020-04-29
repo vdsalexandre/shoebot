@@ -70,7 +70,7 @@ public class Equalizer {
         return getScore(normalize(expected)) == getScore(normalize(input));
     }
 
-    public int getPercentageOf(String expected, String input) {
+    private int getPercentageOf(String expected, String input) {
         double expectedScore = getScore(clean(normalize(expected)));
         double inputScore = getScore(clean(normalize(input)));
         double percentage = inputScore / expectedScore * 100;
@@ -78,7 +78,11 @@ public class Equalizer {
         return (int) Math.round(percentage);
     }
 
-    public boolean isPercentageBiggerOrEqualTo90(int percentage) {
-        return percentage >= 90;
+    public boolean isPercentageBiggerOrEqualTo(String expected, String input, int limit) {
+        int percentage = getPercentageOf(expected, input);
+
+        if (expected.length() <= 5)
+            return percentage >= limit - 10;
+        return percentage >= limit;
     }
 }
