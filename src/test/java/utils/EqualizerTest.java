@@ -1,4 +1,4 @@
-package event;
+package utils;
 
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
