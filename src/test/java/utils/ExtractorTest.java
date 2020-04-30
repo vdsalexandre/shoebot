@@ -16,7 +16,22 @@ public class ExtractorTest {
             "eternal sunshine of the spotless mind,Eternal Sunshine of The Spotless Mind - Theme (Jon Brion)",
             "dr house,Generique Dr. House",
             "kung fu panda,01. Hero - Hans Zimmer (Kung Fu Panda Soundtrack)",
-            "kill bill,Kill Bill Vol. 1 [OST] #14 - The Lonely Shepherd"})
+            "kill bill,Kill Bill Vol. 1 [OST] #14 - The Lonely Shepherd",
+            "toy story,Toy Story soundtrack - 04. Andy's Birthday",
+            "le laboratoire de dexter,Générique Le laboratoire de Dexter",
+            "x files,X Files : Aux frontières du réel - Générique",
+            "harry potter,9. \"Statues\" - Harry Potter and the Deathly Hallows: Part 2 (soundtrack)",
+            "spiderman,Spider-Man (2002) Main Title by Danny Elfman (HD 1080p)",
+            "whiplash,Whiplash Soundtrack 04 - Whiplash",
+            "the mentalist,The Mentalist opening credits",
+            "la belle et la bete,01 La Belle et la Bête - Prologue",
+            "interstellar,Interstellar OST 18 Flying Drone by Hans Zimmer",
+            "the shining,The Shining Soundtrack OST Main title HQ",
+            "coco,COCO - Un Poco Loco - EU French (Subs & Trans) [HD]",
+            "vikings,VIKINGS THEME SONG - If I had a Heart [Soundtrack]",
+            "friends,F.R.I.E.N.D.S - Opening Season 1",
+            "kid paddle,Kid Paddle générique (HD)",
+            "xmen,X-Men (1992) - Générique"})
     void returns_true_when_extracted_word_equals_to_expected_word(String expected, String input) {
         Extractor extractor = new Extractor();
         String extracted = extractor.extract(input);
